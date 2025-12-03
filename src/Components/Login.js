@@ -1,31 +1,32 @@
-import { useState } from "react"
+import { useState } from "react";
 
+const Login = ({ onLogin }) => {
+  const [user, setUser] = useState("");
 
-const Login = ({onLogin}) => {
-
-  //user 정보 관리하기 
-  const [user, setUser] = useState('');
-
-  //input창에 정보 입력 후 새로고침 방지 처리 함수 지정하기 
-  const handlesubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    //App.js에서 전달받은 onlogin에 입력받은 값 user 전달하기 
-    onLogin(user)
-  }
+    // .trim() : 문자열의 좌우 공백 제거하는 메서드
+    user.trim();
+    const name = user.trim();
+    if (!name) return;
+    onLogin(name);
+  };
 
   return (
-    <form id="login_page" onSubmit={ handlesubmit}>
-      <h2>이름을 입력해주세요</h2>
-      <input 
+    <form id="login-page" onSubmit={handleSubmit}>
+      <input
         type="text"
+        className="login-input"
+        placeholder="이름을 입력하세요"
         value={user}
-        onChange={ (e) => {
-          setUser(e.target.value);
-        }
-      }/>
-      <button type="submit">입장하기</button>
+        onChange={(e) => setUser(e.target.value)}
+      />
+      {/* 접근성용, 화면에는 안 보이게 숨기는 버튼 */}
+      <button type="submit" className="login-submit">
+        입장하기
+      </button>
     </form>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

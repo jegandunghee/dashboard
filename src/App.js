@@ -1,10 +1,17 @@
 
 import { useEffect, useState } from 'react'
+import './Styles/dashboard.css';
 import Greeting from './Components/Greeting'
 import Login from './Components/Login'
 import Weather from './Components/Weather'
 import Todos from './Components/Todos'
 import Quotes from './Components/Quotes'
+import Focus from './Components/Focus';
+import BookMark from './Components/BookMark';
+import Rewards from './Components/Rewards';
+import Schedule from './Components/Schedule';
+import GoalModifyDel from './Components/GoalModifyDel';
+import Center from './Components/Center';
 
 const App = () => {
 
@@ -45,15 +52,30 @@ const App = () => {
 
   return (
     <div id='app'>
+      <Focus/>
+      <BookMark/>
+      <Rewards/>
+      <Schedule/>
+      <GoalModifyDel/>
+
+      {/* 가운데 영역 */}
+      <Center 
+        userName={userName}
+        onLogin={handleLogin}
+        onLogout={handleLogout}
+      />
+
+
+      {/* <Greeting/> */}
       
-      { // user의 정보가 있으면 greeting화면, 없으면 login화면 
+      {/* { // user의 정보가 있으면 greeting화면, 없으면 login화면 
       //greeting에는 입력한 문자열 userName 넘기기  로그아웃 함수도 넘겨주기
       //Login에는 handleLogin 함수 넘기기 
       userName ? <Greeting user={userName} onLogout={handleLogout}/> : <Login onLogin={handleLogin}/>
-      }
-      <Quotes/>
-      <Todos/>
+      } */}
+      {/* <Todos/> */}
       <Weather/>
+      <Quotes/>
     </div>
   )
 }

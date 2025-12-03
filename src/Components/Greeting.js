@@ -1,12 +1,17 @@
 
-const Greeting = ({user, onLogout}) => {
+const Greeting = ({ user }) => {
+  const now = new Date();
+  const hour = now.getHours();
 
-  return (    
-    <div>
-      <p id="hello_page"> 안녕하세요 {user}님.</p>
-      <button onClick={onLogout}>로그아웃</button>
-    </div>
-  )
-}
+  let period = "morning";
+  if (hour >= 12 && hour < 18) period = "afternoon";
+  else if (hour >= 18 || hour < 4) period = "evening";
 
-export default Greeting
+  return (
+    <p className="center-greeting">
+      Good {period}, {user}.
+    </p>
+  );
+};
+
+export default Greeting;
