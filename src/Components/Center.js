@@ -5,12 +5,13 @@ import Time from './Time'
 import Todos from './Todos'
 
 const Center = ({ userName, onLogin, onLogout }) => {
+  /* Center에서 구현될 목록  */
+  // Time, Login, Greeting, Todos
   return (
     <div className="center">
       {/* 큰 시계 */}
       <Time />
-
-      
+      {/* 이름있으면 greeting화면+ goal 입력, 없으면 Login */}
       {userName ? (
         <>
           {/* Good 어쩌구, user. */}
@@ -18,11 +19,8 @@ const Center = ({ userName, onLogin, onLogout }) => {
 
           {/* 오늘의 주요 목표 질문 + 입력 + 목록 */}
           <Todos />
-        </>
-      ) : (
-        // 이름 입력
-        <Login onLogin={onLogin} />
-      )}
+        </>) : ( // 이름 입력
+        <Login onLogin={onLogin} /> )}
     </div>
   );
 };
