@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
-import TodoForm from "./TodoForm"
-import TodoList from "./TodoList"
+import GoalForm from "./GoalForm"
+import GoalList from "./GoalList"
 
-const Todos = () => {
+const Goal = () => {
   // id : 현재시간 Date.now() -> 27319371321 식으로 생성됨.
   // done: true/false 
-  // todo: 'text'
+  // goal: 'text'
 
-    //TodoForm에서 받은 값을 관리하는 State 지정 
+    //goalForm에서 받은 값을 관리하는 State 지정 
     const [enterTask, setEnterTask] = useState(() => {
-        //localStorage에 있는 TODOS(key)읽어오기
-        const load = localStorage.getItem("TODOS");
+        //localStorage에 있는 Goal(key)읽어오기
+        const load = localStorage.getItem("Goal");
         //값이 있으면 변환해서 쓰고 없으면 빈배열을 기본값으로 씀
         return load ? JSON.parse(load) : [];
     });
@@ -20,10 +20,10 @@ const Todos = () => {
       //enterTask를 localstorage에 저장
       // 요소를 문자열로 저장 
       const saved = JSON.stringify(enterTask);
-      localStorage.setItem("TODOS", saved);
+      localStorage.setItem("Goal", saved);
     }, [enterTask]);
   
-    //todoForm에서 입력값을 전달받을 함수 지정
+    //goalForm에서 입력값을 전달받을 함수 지정
     const handleTaskSubmit = (text) => {
       //trim(): 문자열의 좌우 공백을 없애주는 매서드 
       const trimmed = text.trim();
@@ -38,15 +38,15 @@ const Todos = () => {
       //전달 받은 값을 객체로 저장하기 
       //id : Date.now()로 고유 id 부여 
       //done : default 로 false 지정, 체크되면 true로 변경
-      const newTodo = {id: Date.now(), done : false, todo : trimmed };
+      const newgoal = {id: Date.now(), done : false, goal : trimmed };
       setEnterTask((prev) => {
-        return [...prev, newTodo]
+        return [...prev, newgoal]
       });
 
     }
 
     // 삭제
-    const handleTodoDel = (id) => {
+    const handlegoalDel = (id) => {
       //idx 번호에 해당되는 list 제거하기 
       //해당되는 idx를 제거한 새로운 데이터를 가진 배열 만들기(filter : 조건부 새로운 배열 만들기)
       // const update = enterTask.filter((item) => {
@@ -75,19 +75,19 @@ const Todos = () => {
     const handleEdit = (id, newText) => {
       setEnterTask((prev) => {
         prev.map((item) => 
-          item.id === id ? {...item, todo: newText} : item
+          item.id === id ? {...item, goal: newText} : item
         )
       })
     }
 
 
   return (
-    <section id="todo-page" className="today-goal">
+    <section id="goal-page" className="today-goal">
       <p className="goal-question">오늘의 주요 목표는 무엇인가요?</p>
-      <TodoForm onSubmitTask = {handleTaskSubmit}/>
-      <TodoList save = {enterTask} onDel = {handleTodoDel} onToggle = {handleToggle} onEdit = {handleEdit}/>
+      <GoalForm onSubmitTask = {handleTaskSubmit}/>
+      <GoalList save = {enterTask} onDel = {handlegoalDel} onToggle = {handleToggle} onEdit = {handleEdit}/>
     </section>
   )
 }
 
-export default Todos
+export default Goal

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TodoForm = ({ onSubmitTask }) => {
+const GoalForm = ({ onSubmitTask }) => {
   const [task, setTask] = useState("");
 
   const handleSubmit = (e) => {
@@ -24,7 +24,7 @@ const TodoForm = ({ onSubmitTask }) => {
   // }
 
   return (
-    <div id="todo-form">
+    <div id="goal-form">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -41,4 +41,4 @@ const TodoForm = ({ onSubmitTask }) => {
   );
 };
 
-export default TodoForm;
+export default GoalForm;

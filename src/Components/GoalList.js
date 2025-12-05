@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import GoalModifyDel from "./GoalModifyDel";
 
-const TodoList = ({ save, onDel, onToggle, onEdit }) => {
+const GoalList = ({ save, onDel, onToggle, onEdit }) => {
   const [openMenuId, setOpenMenuId] = useState(null);
   const [editId, setEditId] = useState(null);
   const [editValue, setEditValue] = useState("");
@@ -18,7 +18,7 @@ const TodoList = ({ save, onDel, onToggle, onEdit }) => {
   //
   const handleEdit = (item) => {
     setEditId(item.id);
-    setEditValue(item.todo);
+    setEditValue(item.goal);
     setOpenMenuId(null);
   };
 
@@ -40,7 +40,7 @@ const TodoList = ({ save, onDel, onToggle, onEdit }) => {
   };
 
   return (
-    <ul id="todo-list" className="today-goal-list">
+    <ul id="goal-list" className="today-goal-list">
       {save.map((item, idx) => {
         //done : false / true
         const isDone = item.done;
@@ -80,7 +80,7 @@ const TodoList = ({ save, onDel, onToggle, onEdit }) => {
                 </form>
               ) : (
                 <span className={`goal-text ${isDone ? "goal-text-done" : ""}`}>
-                  {item.todo}
+                  {item.goal}
                 </span>
               )}
             </label>
@@ -108,4 +108,4 @@ const TodoList = ({ save, onDel, onToggle, onEdit }) => {
   );
 };
 
-export default TodoList;
+export default GoalList;

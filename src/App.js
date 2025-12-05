@@ -5,10 +5,10 @@ import Weather from './Components/Weather'
 import Quotes from './Components/Quotes'
 import Focus from './Components/Focus';
 import BookMark from './Components/BookMark';
-import Rewards from './Components/Rewards';
 import Schedule from './Components/Schedule';
 import GoalModifyDel from './Components/GoalModifyDel';
 import Center from './Components/Center';
+import Todo from './Components/Todo';
 
 const App = () => {
 
@@ -51,10 +51,8 @@ const App = () => {
     <div id='app'>
       <Focus/>
       <BookMark/>
-      <Rewards/>
       <Schedule/>
-      <GoalModifyDel/>
-
+      <Todo/>
       {/* 가운데 영역 */}
       <Center 
         userName={userName}
