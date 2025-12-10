@@ -9,6 +9,7 @@ import Schedule from './Components/Schedule';
 import GoalModifyDel from './Components/GoalModifyDel';
 import Center from './Components/Center';
 import Todo from './Components/Todo';
+import Mode from './Components/Mode';
 
 const App = () => {
 
@@ -49,6 +50,7 @@ const App = () => {
 
   return (
     <div id='app'>
+      <Mode/>
       <Focus/>
       <BookMark/>
       <Schedule/>

@@ -458,6 +458,93 @@ button{
 }
 
 /* Todo 컴포넌트 */
-.todo{
-  
+.todo.panel {
+  align-items: stretch;
+}
+
+/* 0 / 0 완료 */
+.todo-status {
+  width: 100%;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* 전체 몸통 */
+.todo-body {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* 비어 있을 때: 문구 + 오른쪽 + 버튼 */
+.todo-empty-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0 1.5rem;
+}
+
+.todo-empty-text {
+  color: #ffffff;
+}
+
+/* 리스트 */
+.todo-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 248, 238, 0.9);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+}
+
+.todo-text {
+  font-size: 0.9rem;
+}
+
+/* - 버튼 */
+.todo-del-btn {
+  min-width: 32px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 입력 줄 */
+.todo-input-row {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.todo-input-row input {
+  flex: 1;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  outline: none;
+}
+
+/* 리스트 있을 때 맨 아래 +만 있는 줄 */
+.todo-add-row {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.todo-plus-btn {
+  min-width: 32px;
+  height: 32px;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 2rem;
 }
