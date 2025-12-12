@@ -68,7 +68,7 @@ const Todo = () => {
         <div className="todo panel">
           {/* 상단 타이틀 + X */}
           <div className="top_container">
-            <p>오늘의 목표</p>
+            <p>Todo</p>
             <p className="close" onClick={handleTogglePanel}>
               ×
             </p>

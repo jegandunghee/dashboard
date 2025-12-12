@@ -485,7 +485,7 @@ button{
 }
 
 .todo-empty-text {
-  color: #ffffff;
+  color: #444;
 }
 
 /* 리스트 */
@@ -516,6 +516,7 @@ button{
   height: 24px;
   justify-content: center;
   align-items: center;
+  color: #eee;
 }
 
 /* 입력 줄 */
@@ -545,6 +546,6 @@ button{
   height: 32px;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
+  color: #666;
   font-size: 2rem;
 }
