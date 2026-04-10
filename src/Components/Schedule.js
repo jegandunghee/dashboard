@@ -30,7 +30,7 @@ const Schedule = () => {
       {schedule && (
         <>
           <div onClick={() => setSchedule(false)} style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 90, background: "transparent" }}></div>
-          <div className="schedule panel" style={{ alignSelf: 'flex-start', zIndex: 101, position: "relative" }}>
+          <div className="schedule panel" style={{ alignSelf: 'flex-start', zIndex: 101, position: "relative", minWidth: '320px' }}>
             <div className="top_container">
               <p>Schedule</p>
               <p className="close" onClick={handleToggle} style={{ cursor: 'pointer' }}>×</p>
@@ -46,7 +46,7 @@ const Schedule = () => {
                   {items.map(item => (
                     <li key={item.id} className="todo-item" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                       <span className="todo-text"><strong>{item.time}</strong> {item.text}</span>
-                      <button type="button" className="todo-del-btn" onClick={() => handleDelete(item.id)} style={{ cursor: 'pointer', background: 'transparent', border: 'none', color: '#fff' }}>-</button>
+                      <button type="button" className="todo-del-btn" onClick={() => handleDelete(item.id)} style={{ cursor: 'pointer', background: 'transparent', border: 'none', color: '#ff4d4f', fontSize: '18px', fontWeight: 'bold' }}>-</button>
                     </li>
                   ))}
                 </ul>
@@ -59,7 +59,7 @@ const Schedule = () => {
                 </form>
               ) : (
                 <div className="todo-add-row" style={{ textAlign: 'center', marginTop: '10px' }}>
-                  <button type="button" className="todo-plus-btn" onClick={() => setInputMode(true)} style={{ cursor: 'pointer', fontSize: '1.2rem', background: 'transparent', border: 'none', color: '#fff' }}>+</button>
+                  <button type="button" className="todo-plus-btn" onClick={() => setInputMode(true)} style={{ cursor: 'pointer', fontSize: '1.2rem', background: 'transparent', border: 'none', color: '#444' }}>+</button>
                 </div>
               )}
             </div>

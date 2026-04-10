@@ -524,7 +524,7 @@ button{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 248, 238, 0.9);
+  background: rgba(255, 255, 255, 0.7);
   padding: 0.5rem 0.75rem;
   border-radius: 0.75rem;
 }
@@ -533,13 +533,20 @@ button{
   font-size: 0.9rem;
 }
 
-/* - 버튼 */
-.todo-del-btn {
-  min-width: 32px;
-  height: 24px;
-  justify-content: center;
-  align-items: center;
-  color: #eee;
+/* ... 삭제 메뉴 버튼 */
+.todo-menu-btn {
+  border: none;
+  background: transparent;
+  color: #666;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+  padding: 0 4px;
+}
+.todo-item:hover .todo-menu-btn {
+  opacity: 1;
 }
 
 /* 입력 줄 */

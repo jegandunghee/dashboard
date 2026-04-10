@@ -13,8 +13,7 @@ const Todo = () => {
   // 입력 값
   const [input, setInput] = useState("");
 
-  // 완료(=삭제)된 개수
-  const [doneCount, setDoneCount] = useState(0);
+  const [openMenuId, setOpenMenuId] = useState(null);
 
   const handleTogglePanel = () => {
     setIsOpen((prev) => !prev);
@@ -49,6 +48,7 @@ const Todo = () => {
     const newItem = {
       id: Date.now(),
       text: trimmed,
+      checked: false
     };
 
     setTodos((prev) => [...prev, newItem]);
@@ -56,14 +56,20 @@ const Todo = () => {
     setInputMode(false);
   };
 
-  // - 버튼: 삭제 = 완료
+  // 삭제
   const handleDelete = (id) => {
     setTodos((prev) => prev.filter((item) => item.id !== id));
-    setDoneCount((prev) => prev + 1);
+  };
+
+  const handleCheck = (id) => {
+    // 풀기/체크 토글
+    setTodos((prev) =>
+      prev.map(item => item.id === id ? { ...item, checked: !item.checked } : item)
+    );
   };
 
   const currentCount = todos.length;
-  const totalCount = currentCount + doneCount; // 지금까지 추가된 총 개수
+  const doneCount = todos.filter(item => item.checked).length;
 
   return (
     <>
@@ -85,7 +91,7 @@ const Todo = () => {
             {/* 완료 카운트 */}
             <div className="todo-status">
               <span>
-                {doneCount} / {totalCount} 완료
+                {doneCount} / {currentCount} 완료
               </span>
             </div>
 
@@ -109,15 +115,29 @@ const Todo = () => {
               {currentCount > 0 && (
                 <ul className="todo-list">
                   {todos.map((item) => (
-                    <li key={item.id} className="todo-item">
-                      <span className="todo-text">{item.text}</span>
+                    <li key={item.id} className="todo-item" style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <input 
+                        type="checkbox" 
+                        checked={item.checked || false} 
+                        onChange={() => handleCheck(item.id)}
+                        style={{ cursor: 'pointer' }}
+                      />
+                      <span className="todo-text" style={{ flex: 1, textDecoration: item.checked ? 'line-through' : 'none', color: item.checked ? '#aaa' : 'inherit' }}>
+                        {item.text}
+                      </span>
                       <button
                         type="button"
-                        className="todo-del-btn"
-                        onClick={() => handleDelete(item.id)}
+                        className="todo-menu-btn"
+                        onClick={() => setOpenMenuId(prev => prev === item.id ? null : item.id)}
                       >
-                        -
+                        ⋯
                       </button>
+
+                      {openMenuId === item.id && (
+                        <div style={{ position: 'absolute', right: '0', top: '100%', background: '#fff', borderRadius: '8px', boxShadow: '0 6px 20px rgba(0,0,0,0.25)', zIndex: 110 }}>
+                          <p onClick={() => { handleDelete(item.id); setOpenMenuId(null); }} style={{ padding: '8px 16px', margin: 0, cursor: 'pointer', color: 'red', fontSize: '14px' }}>삭제하기</p>
+                        </div>
+                      )}
                     </li>
                   ))}
                 </ul>
