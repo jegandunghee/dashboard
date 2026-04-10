@@ -17,8 +17,8 @@ const Greeting = ({ user }) => {
   }
 
   return (
-    <p id="greeting-page">
-      Good {period}, {user}
+    <p id="greeting-page" style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>
+      Good {period}.
     </p>
   );
 };

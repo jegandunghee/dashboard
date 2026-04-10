@@ -9,60 +9,83 @@ import Schedule from './Components/Schedule';
 import GoalModifyDel from './Components/GoalModifyDel';
 import Center from './Components/Center';
 import Todo from './Components/Todo';
-import Mode from './Components/Mode';
 
 const App = () => {
 
-  //user의 정보를 전달하려면 부모 component가 전달해줘야함 
   const [userName, setUserName] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [isFallback, setIsFallback] = useState(false);
 
+  useEffect(() => {
+    // Theme logic
+    const updateTheme = () => {
+      const currentHour = new Date().getHours();
+      // 06:00 to 17:59:59 is Light mode
+      if (currentHour >= 6 && currentHour < 18) {
+        document.body.className = "light";
+      } else {
+        document.body.className = "dark";
+      }
+    };
+    updateTheme();
+    const themeTimer = setInterval(updateTheme, 60000);
 
-  //브라우저가 실행되자마자 user정보가 있는지 확인해야함 
-  // user의 정보가 로컬 스토리지에 있으면 Greeting화면, 없으면 Loigin화면 
-  useEffect( () => {
+    // Check geolocation
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({ lat: position.coords.latitude, lon: position.coords.longitude });
+          setIsFallback(false);
+        },
+        (err) => {
+          // Fallback to Seoul
+          setLocation({ lat: 37.5665, lon: 126.9780 });
+          setIsFallback(true);
+        },
+        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+      );
+    } else {
+      // Fallback to Seoul
+      setLocation({ lat: 37.5665, lon: 126.9780 });
+      setIsFallback(true);
+    }
+
+    // Check user info
     const saved = localStorage.getItem("USER_NAME");
-    //saved에 값이 있으면 
     if(saved){
       setUserName(saved);
     }
-  },[])
 
-  // 함수는 Login 컴포넌트로 전달되고 Login 컴포넌트에서 input으로 입력된 값을 전달받음 
-  //사용자가 입력한 값은 data로 전달되고 setUserName로 userName의 값이 입력받은 data로 전달됨. 
-  // 그 값은 localStorage에 저장됨.
+    return () => clearInterval(themeTimer);
+  }, []);
+
   const handleLogin = (data) => {
     setUserName(data);
     localStorage.setItem("USER_NAME", data);
   }
 
-  //로그아웃 되었을 때 함수 지정하기 
   const handleLogout = () => {
     localStorage.clear();
-    // setUserName(null);
-
-    //전체 페이지 
     window.location.reload();
-    
   }
-
-  
-
 
   return (
     <div id='app'>
-      <Mode/>
-      <Focus/>
-      <BookMark/>
-      <Schedule/>
-      <Todo/>
+      <div className="left-menus">
+        <Focus/>
+        <BookMark/>
+        <Schedule/>
+        <Todo/>
+      </div>
       {/* 가운데 영역 */}
       <Center 
         userName={userName}
         onLogin={handleLogin}
         onLogout={handleLogout}
+        isFallback={isFallback}
       />
 
-      <Weather/>
+      <Weather location={location} isFallback={isFallback} />
       <Quotes/>
     </div>
   )

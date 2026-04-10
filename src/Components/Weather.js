@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const Weather = () => {
+const Weather = ({ location, isFallback }) => {
   //api key , icon 정보 가져오기
   const KEY = "daf6c925c4d9f3dcc02bc79741bc5f8d";
 
@@ -27,18 +27,16 @@ const Weather = () => {
       //axios.get으로 url에 있는 정보 프로미스(?) 형식으로 불러오기
       const res = await axios.get(URL);
 
-      //어떤 데이터가 포함되어져있는지 console.log로 확인하기
-      // console.log(res.data);
-
       //가져온 정보에 들어있는 데이터를 불러오면 json형식으로 불러와짐
       setWeather(res.data);
 
       //날씨에 맞는 아이콘 정보 가져오기
       //아이콘 코드값 가져오기 (res.data에서 가져오기 )
-      const iconCode = res.data.weather[0].icon;
-      const ICON = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-
-      setIconUrl(ICON);
+      if (res.data.weather && res.data.weather.length > 0) {
+        const iconCode = res.data.weather[0].icon;
+        const ICON = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+        setIconUrl(ICON);
+      }
     } catch (err) {
       setError("날씨 정보를 가져올 수 없습니다." + err.message);
     } finally {
@@ -47,35 +45,11 @@ const Weather = () => {
     }
   };
 
-  //사용자 위치정보 불러오기
-  //실행되자마자 한번만 실행되도록 설정 useEffect( () => {}, []);
   useEffect(() => {
-    //.getCurrentPosition( )사용을 위한 option 설정하기
-    const options = {
-      enableHighAccuracy: true, //가능한 정확하게
-      timeout: 5000, //5초안에 못가져오면 에러
-      maximumAge: 0, //캐시된 위치를 쓰지 않기
-    };
-
-    // 위치정보 사용 가능 여부 확인하기
-    if ("geolocation" in navigator) {
-      /* 위치정보 사용 가능  -> .getCurrentPosition( ) 사용하기*/
-      navigator.geolocation.getCurrentPosition(
-        //.getCurrentPosition()사용 시 성공, 에러, option값 각각 지정하기 
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          fetchWeather(latitude, longitude);
-        },
-        (err) => {
-          // console.error(err);
-          setError("위치 정보를 가져올 수 없습니다.");
-        },
-        options);
-    } else {
-      /* 위치정보 사용 불가능 -> error 출력 */
-      alert(setError("이 브라우저에서는 위치 정보 사용이 불가능합니다."));
+    if (location) {
+      fetchWeather(location.lat, location.lon);
     }
-  }, []);
+  }, [location]);
 
   return (
     <div id="weather-page">
@@ -83,17 +57,17 @@ const Weather = () => {
       {loading && <p className="loading">날씨 정보를 가져오는중..</p>}
 
       {/* 에러가 생겼을 때 */}
-      {error && <p className="error">위치 정보 사용이 불가능합니다.😭</p>}
+      {error && <p className="error">{error}</p>}
 
       {/* 위치 정보 불러오기  */}
-      {!weather && <p>날씨 정보를 기다리는중..!</p>}
+      {!weather && !loading && !error && <p>날씨 정보를 기다리는중..!</p>}
 
       {weather && (
         <div className="weather-wrap">
-          {/* {iconUrl && (
-            <img src={iconUrl} alt={weather.weather[0].description} />
-          )} */}
-          <p>도시 : {weather.name}</p>
+          {iconUrl && (
+             <img src={iconUrl} alt={weather.weather[0].description} className="weather-icon" />
+          )}
+          <p>도시 : {isFallback ? "서울(예비)" : weather.name}</p>
           <p>현재온도 : {weather.main.temp}℃ </p>
           <p>체감온도 : {weather.main.feels_like}℃ </p>
           

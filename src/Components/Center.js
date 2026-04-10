@@ -4,13 +4,13 @@ import Login from './Login'
 import Time from './Time'
 import Goal from './Goal'
 
-const Center = ({ userName, onLogin, onLogout }) => {
+const Center = ({ userName, onLogin, onLogout, isFallback }) => {
   /* Center에서 구현될 목록  */
   // Time, Login, Greeting, Goals
   return (
     <div className="center">
       {/* 큰 시계 */}
-      <Time />
+      <Time isFallback={isFallback} />
       {/* 이름있으면 greeting화면+ goal 입력, 없으면 Login */}
       {userName ? (
         <>

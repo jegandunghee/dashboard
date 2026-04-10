@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Time = () => {
+const Time = ({ isFallback }) => {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -13,13 +13,19 @@ const Time = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // 시간 포맷 (HH:MM:SS)
-  const formatted = time.toLocaleTimeString("ko-KR", {
+  const options = {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
     hour12: false,
-  });
+  };
+
+  if (isFallback) {
+    options.timeZone = "Asia/Seoul";
+  }
+
+  // 시간 포맷 (HH:MM:SS)
+  const formatted = time.toLocaleTimeString("ko-KR", options);
 
   return (
     <div className="time">

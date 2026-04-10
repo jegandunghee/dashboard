@@ -73,11 +73,11 @@ const Goal = () => {
 
     //수정 
     const handleEdit = (id, newText) => {
-      setEnterTask((prev) => {
+      setEnterTask((prev) => 
         prev.map((item) => 
           item.id === id ? {...item, goal: newText} : item
         )
-      })
+      )
     }
 
 
