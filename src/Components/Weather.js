@@ -65,12 +65,12 @@ const Weather = ({ location, isFallback }) => {
       {weather && (
         <div className="weather-wrap">
           {iconUrl && (
-             <img src={iconUrl} alt={weather.weather[0].description} className="weather-icon" />
+            <img src={iconUrl} alt={weather.weather[0].description} className="weather-icon" />
           )}
-          <p>도시 : {isFallback ? "서울(예비)" : weather.name}</p>
+          <p>도시 : {isFallback ? "서울(임시) " : weather.name}</p>
           <p>현재온도 : {weather.main.temp}℃ </p>
           <p>체감온도 : {weather.main.feels_like}℃ </p>
-          
+
         </div>
       )}
     </div>
