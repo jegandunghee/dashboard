@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# 개인 맞춤형 대시보드 (Personal Dashboard)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+이 프로젝트는 React를 기반으로 제작된 **개인 맞춤형 대시보드 웹 애플리케이션**입니다. 
+사용자의 시간 관리를 돕고, 동기 부여를 제공하며, 매일 필요한 정보와 도구를 한 화면에 제공하여 생산성을 높이는 것을 목적으로 합니다. (예: Momentum과 유사한 기능 제공)
 
-## Available Scripts
+## 📌 주요 기능 (Features)
 
-In the project directory, you can run:
+- **🕒 동적 시계 및 맞춤형 인사말 (Clock & Greeting)**
+  - 현재 시간을 직관적으로 보여주며, 시간에 맞는 인사말(새벽, 아침, 점심, 저녁, 밤)을 제공합니다.
+  - 사용자의 이름을 기억하여 개인화된 인사말을 건넵니다.
 
-### `npm start`
+- **🎯 오늘의 목표 (Daily Goal)**
+  - 사용자가 오늘 달성하고자 하는 핵심 목표를 설정하고, 수정 또는 삭제할 수 있습니다.
+  - 화면 중앙에 배치되어 사용자가 자신의 목표에 집중할 수 있도록 돕습니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **🌤️ 위치 기반 날씨 정보 (Weather)**
+  - 사용자의 현재 위치(Geolocation API)를 기반으로 날씨 정보를 가져옵니다. 
+  - 권한이 거부되거나 획득을 실패할 경우 기본값(서울)의 날씨를 표시합니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **📝 스마트 위젯 메뉴 (좌측 아코디언 메뉴)**
+  - 화면 좌측에 아코디언 스타일(사이드 메뉴)로 구성되어 필요할 때만 화면에 표시됩니다. 바깥 화면 클릭 시 자동으로 닫힙니다.
+  1. **Focus (포모도로 타이머):** 집중에 필요한 시간을 설정해두고 활용할 수 있는 타이머.
+  2. **BookMark (바로가기):** 자주 방문하는 웹사이트를 편리하게 이동할 수 있는 링크 메뉴.
+  3. **Schedule (일정 관리):** 간단한 일정을 확인하거나 관리할 수 있는 섹션.
+  4. **Todo (할 일 목록):** 해야 할 일들을 추가, 완료 체크, 삭제하며 관리할 수 있는 기능.
 
-### `npm test`
+- **🌗 자동 테마 전환 (Light & Dark Mode)**
+  - 접속한 시간대에 따라 낮 시간(오전 6시 ~ 오후 6시 이전)에는 밝은 테마, 밤 시간(오후 6시 ~ 오전 6시 이전)에는 어두운 테마가 자동으로 적용됩니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **💬 랜덤 명언 (Quotes)**
+  - 화면 하단에 영감을 주는 명언이 랜덤하게 표시되어 사용자에게 동기를 부여합니다.
 
-### `npm run build`
+- **💾 데이터 자동 저장 (Persistence)**
+  - 사용자의 이름, 할 일, 목표 등 주요 데이터는 브라우저의 `localStorage`를 활용하여 새로고침하거나 브라우저를 다시 열어도 안전하게 보존됩니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠 사용 기술 (Tech Stack)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **프론트엔드 (Frontend):** React.js (v19.2.0)
+- **스타일링 (Styling):** Vanilla CSS (`dashboard.css`를 통한 사용자 정의 UI 구현, Glassmorphism 디자인 적용)
+- **상태 관리:** React Hooks (`useState`, `useEffect`)
+- **기타 라이브러리:** `axios` (API 기반 정보 가져오기용), `react-icon`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🚀 설치 및 실행 방법 (Getting Started)
 
-### `npm run eject`
+이 프로젝트를 로컬 환경에서 실행하려면 Node.js가 설치되어 있어야 합니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **프로젝트 클론 및 폴더 이동**
+   이동하려는 디렉토리에서 프로젝트를 확인하고 진입합니다.
+   
+2. **패키지 설치**
+   의존성 모듈을 설치합니다.
+   ```bash
+   npm install
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **개발 서버 실행**
+   명령어를 실행하여 서버를 시작합니다.
+   ```bash
+   npm start
+   ```
+   실행 후 브라우저에서 [http://localhost:3000](http://localhost:3000)으로 접속하여 대시보드를 확인할 수 있습니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 📁 디렉토리 구조 (Folder Structure)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```text
+src/
+├── Components/         # 기능별로 분리된 React 컴포넌트 모음
+│   ├── Weather.js      # 날씨 정보 
+│   ├── Quotes.js       # 랜덤 명언
+│   ├── Focus.js        # 타이머 및 집중 모드
+│   ├── BookMark.js     # 링크 관리
+│   ├── Schedule.js     # 일정 표시
+│   ├── Todo.js         # 할 일 리스트
+│   ├── Center.js       # 화면 중앙 인터페이스 
+│   ├── Time.js         # 시계 
+│   ├── Greeting.js     # 인사말 및 이름 입력
+│   ├── Goal*.js        # 목표 설정, 수정, 삭제 관련 컴포넌트
+│   └── ...
+├── Styles/             # 프로젝트 내 스타일시트 폴더
+│   └── dashboard.css   # 메인 스타일 정의 (다크모드/라이트모드, 레이아웃 등)
+├── Data/               # (필요시 데이터 관련 파일이 위치)
+├── App.js              # 메인 애플리케이션 컴포넌트 (테마 관리, 레이아웃 조립)
+└── index.js            # React 앱의 진입점
+```
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 💡 개발시 주안점 (Design Decisions)
+- 브라우저를 켤 때마다 기분 좋은 화면을 볼 수 있도록 **깔끔한 인터페이스**와 **시각적인 미려함**에 집중했습니다.
+- 여러 컴포넌트를 한 화면에서 구성하되, 화면이 복잡해지는 것을 막기 위해 **좌측 아코디언/사이드바 형태**로 부가 기능을 숨겼습니다.
+- 외부 라이브러리에 크게 의존하기 보다는 브라우저가 제공하는 Web API(예: Geolocation, LocalStorage)와 CSS Transition을 활용하여 **가벼운 구동**과 **성능 최적화**를 추구했습니다.
