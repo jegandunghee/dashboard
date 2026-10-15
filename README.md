@@ -40,25 +40,8 @@
 - **상태 관리:** React Hooks (`useState`, `useEffect`)
 - **기타 라이브러리:** `axios` (API 기반 정보 가져오기용), `react-icon`
 
-## 🚀 설치 및 실행 방법 (Getting Started)
-
-이 프로젝트를 로컬 환경에서 실행하려면 Node.js가 설치되어 있어야 합니다.
-
-1. **프로젝트 클론 및 폴더 이동**
-   이동하려는 디렉토리에서 프로젝트를 확인하고 진입합니다.
-   
-2. **패키지 설치**
-   의존성 모듈을 설치합니다.
-   ```bash
-   npm install
-   ```
-
-3. **개발 서버 실행**
-   명령어를 실행하여 서버를 시작합니다.
-   ```bash
-   npm start
-   ```
-   실행 후 브라우저에서 [http://localhost:3000](http://localhost:3000)으로 접속하여 대시보드를 확인할 수 있습니다.
+## 🚀링크
+dashboard-pi-taupe.vercel.app
 
 ## 📁 디렉토리 구조 (Folder Structure)
 
